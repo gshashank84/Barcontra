@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.psit.ayush.barcontra.parent_signup">
+    tools:context="com.orizon.shashank_ayush.barcontra.parent_signup">
 
     <EditText
         android:id="@+id/editText"

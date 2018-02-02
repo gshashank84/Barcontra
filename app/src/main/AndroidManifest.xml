@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.psit.ayush.barcontra">
+    package="com.orizon.shashank_ayush.barcontra">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.orizon.shashank_ayush.barcontra.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +24,14 @@
         <activity
             android:name=".child_login"
             android:label="@string/title_activity_child_login" />
-        <activity android:name=".clhild_login" />
-        <activity android:name=".parent_signin" />
-        <activity android:name=".parent_signup"></activity>
+        <activity android:name="com.orizon.shashank_ayush.barcontra.clhild_login" />
+        <activity android:name="com.orizon.shashank_ayush.barcontra.parent_signin" />
+        <activity android:name="com.orizon.shashank_ayush.barcontra.parent_signup" />
+
+        <service
+            android:name="com.orizon.shashank_ayush.barcontra.TrackerService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

@@ -6,13 +6,26 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsResult;
+
+public class MainActivity extends Activity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int PERMISSIONS_REQUEST = 1;
+    LocationRequest mLocationRequest;
+    GoogleApiClient mGoogleApiClient;
+    PendingResult<LocationSettingsResult> result;
+    final static int REQUEST_LOCATION = 199;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,5 +66,10 @@ public class MainActivity extends Activity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }

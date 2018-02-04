@@ -52,15 +52,7 @@ public class MainActivity extends Activity implements GoogleApiClient.OnConnecti
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
 
-        SharedPreferences prefs = getSharedPreferences("X", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("lastActivity", getClass().getName());
-        editor.commit();
-    }
 
     private void startTrackerService() {
         startService(new Intent(this, TrackerService.class));

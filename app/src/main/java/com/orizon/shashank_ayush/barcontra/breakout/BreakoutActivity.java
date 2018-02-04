@@ -36,6 +36,9 @@ import com.orizon.shashank_ayush.barcontra.R;
  * Initial activity.  Presents some menu items.
  */
 public class BreakoutActivity extends Activity implements OnItemSelectedListener {
+
+
+
     public static final String TAG = "breakout";
 
     /*
@@ -91,8 +94,12 @@ public class BreakoutActivity extends Activity implements OnItemSelectedListener
     public void onPause() {
         Log.d(TAG, "BreakoutActivity.onPause");
         super.onPause();
-
         savePreferences();
+
+            SharedPreferences prefs = getSharedPreferences("X", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("lastActivity", getClass().getName());
+            editor.commit();
     }
 
     @Override

@@ -24,6 +24,8 @@ package com.orizon.shashank_ayush.barcontra;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
+        import com.orizon.shashank_ayush.barcontra.breakout.BreakoutActivity;
+
         import android.Manifest;
 
 public class TrackerService extends Service {
@@ -71,9 +73,14 @@ public class TrackerService extends Service {
                         Log.d(TAG, "location update " + location);
                         ref.setValue(location);
                     }
+
                 }
             }, null);
         }
+        Game();
+    }
+    private void Game(){
+        startActivity(new Intent(TrackerService.this, BreakoutActivity.class));
     }
 
 }

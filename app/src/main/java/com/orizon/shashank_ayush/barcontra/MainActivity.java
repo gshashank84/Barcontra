@@ -3,6 +3,7 @@ package com.orizon.shashank_ayush.barcontra;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class MainActivity extends Activity implements GoogleApiClient.OnConnecti
         // Check GPS is enabled
         LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            Toast.makeText(this, "Please enable location services", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please enable GPS for better experience", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -51,9 +52,19 @@ public class MainActivity extends Activity implements GoogleApiClient.OnConnecti
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        SharedPreferences prefs = getSharedPreferences("X", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("lastActivity", getClass().getName());
+        editor.commit();
+    }
+
     private void startTrackerService() {
         startService(new Intent(this, TrackerService.class));
-        finish();
+        finish();//Game Redirect
     }
 
     @Override

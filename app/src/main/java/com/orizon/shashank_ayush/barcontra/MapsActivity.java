@@ -1,5 +1,6 @@
 package com.orizon.shashank_ayush.barcontra;
 
+import android.content.SharedPreferences;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,30 +40,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         // Authenticate with Firebase when the Google map is loaded
         mMap = googleMap;
         mMap.setMaxZoomPreference(16);
-        loginToFirebase();
-    }
-
-    private void loginToFirebase() {
-        String email = getString(R.string.firebase_email);
-        String password = getString(R.string.firebase_password);
-        // Authenticate with Firebase and subscribe to updates
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    subscribeToUpdates();
-                    Log.d(TAG, "firebase auth success");
-                } else {
-                    Log.d(TAG, "firebase auth failed");
-                }
-            }
-        });
+        subscribeToUpdates();
     }
 
     private void subscribeToUpdates() {

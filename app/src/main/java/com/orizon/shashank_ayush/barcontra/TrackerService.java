@@ -36,24 +36,10 @@ public class TrackerService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        buildNotification();
-        loginToFirebase();
+        requestLocationUpdates();
     }
 
-    private void buildNotification() {
-        String stop = "stop";
-        registerReceiver(stopReceiver, new IntentFilter(stop));
-        PendingIntent broadcastIntent = PendingIntent.getBroadcast(
-                this, 0, new Intent(stop), PendingIntent.FLAG_UPDATE_CURRENT);
-        // Create the persistent notification
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(getString(R.string.notification_text))
-                .setOngoing(true)
-                .setContentIntent(broadcastIntent)
-                .setSmallIcon(R.drawable.ic_tracker);
-        startForeground(1, builder.build());
-    }
+
 
     protected BroadcastReceiver stopReceiver = new BroadcastReceiver() {
         @Override
@@ -64,24 +50,6 @@ public class TrackerService extends Service {
             stopSelf();
         }
     };
-
-    private void loginToFirebase() {
-        // Authenticate with Firebase, and request location updates
-        String email = getString(R.string.firebase_email);
-        String password = getString(R.string.firebase_password);
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
-            @Override
-            public void onComplete(Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Log.d(TAG, "firebase auth success");
-                    requestLocationUpdates();
-                } else {
-                    Log.d(TAG, "firebase auth failed");
-                }
-            }
-        });
-    }
 
     private void requestLocationUpdates() {
         LocationRequest request = new LocationRequest();

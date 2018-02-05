@@ -78,7 +78,9 @@ public class TrackerService extends Service {
         Game();
     }
     private void Game(){
-        startActivity(new Intent(TrackerService.this, BreakoutActivity.class));
+        Intent dialogIntent = new Intent(this, BreakoutActivity.class);
+        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(dialogIntent);
     }
 
 }

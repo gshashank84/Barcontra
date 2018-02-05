@@ -41,8 +41,6 @@ public class TrackerService extends Service {
         requestLocationUpdates();
     }
 
-
-
     protected BroadcastReceiver stopReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {

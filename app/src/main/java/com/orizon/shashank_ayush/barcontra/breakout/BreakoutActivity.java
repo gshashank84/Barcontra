@@ -31,10 +31,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.orizon.shashank_ayush.barcontra.R;
+import com.orizon.shashank_ayush.barcontra.TrackerService;
 
 /**
  * Initial activity.  Presents some menu items.
  */
+
 public class BreakoutActivity extends Activity implements OnItemSelectedListener {
 
 
@@ -95,12 +97,12 @@ public class BreakoutActivity extends Activity implements OnItemSelectedListener
         Log.d(TAG, "BreakoutActivity.onPause");
         super.onPause();
         savePreferences();
-
             SharedPreferences prefs = getSharedPreferences("X", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
             editor.putString("lastActivity", getClass().getName());
             editor.commit();
     }
+
 
     @Override
     public void onResume() {

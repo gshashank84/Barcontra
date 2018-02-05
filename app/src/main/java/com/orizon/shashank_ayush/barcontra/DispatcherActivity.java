@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 
+import com.orizon.shashank_ayush.barcontra.breakout.BreakoutActivity;
+
 public class DispatcherActivity extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,13 @@ public class DispatcherActivity extends AppCompatActivity {
             activityClass = StartActivity.class;
         }
 
-        startActivity(new Intent(this, activityClass));
+        if(activityClass == BreakoutActivity.class){
+            //Open Trackerservice if Game is opened
+            startActivity(new Intent(this, MainActivity.class));
+        }
+
+        else{
+            startActivity(new Intent(this, activityClass));
+        }
     }
 }

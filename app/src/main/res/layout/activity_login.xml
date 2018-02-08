@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
             android:contentDescription="@string/todo"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_launcher_round"
             app:srcCompat="@drawable/logo" />
 
         <android.support.design.widget.TextInputLayout

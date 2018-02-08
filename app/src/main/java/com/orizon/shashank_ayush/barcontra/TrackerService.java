@@ -24,7 +24,6 @@ package com.orizon.shashank_ayush.barcontra;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DatabaseReference;
         import com.google.firebase.database.FirebaseDatabase;
-        import com.orizon.shashank_ayush.barcontra.breakout.BreakoutActivity;
 
         import android.Manifest;
 
@@ -36,22 +35,8 @@ public class TrackerService extends Service {
     public IBinder onBind(Intent intent) {return null;}
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        requestLocationUpdates();
-    }
+    public int onStartCommand(Intent intent, int flags, int startId) {
 
-    protected BroadcastReceiver stopReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "received stop broadcast");
-            // Stop the service when the notification is tapped
-            unregisterReceiver(stopReceiver);
-            stopSelf();
-        }
-    };
-
-    private void requestLocationUpdates() {
         LocationRequest request = new LocationRequest();
         request.setInterval(10000);
         request.setFastestInterval(5000);
@@ -75,12 +60,20 @@ public class TrackerService extends Service {
                 }
             }, null);
         }
-        Game();
+        return START_STICKY;
     }
-    private void Game(){
-        Intent dialogIntent = new Intent(this, BreakoutActivity.class);
-        dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(dialogIntent);
-    }
+
+ //   @Override
+ //   public void onCreate() {
+ //       super.onCreate();
+ //       requestLocationUpdates();
+ //   }
+
+
+  //  private void Game(){
+    //    Intent dialogIntent = new Intent(this, BreakoutActivity.class);
+      //  dialogIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        //startActivity(dialogIntent);
+    //}
 
 }

